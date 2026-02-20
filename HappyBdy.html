@@ -1,0 +1,289 @@
+<!DOCTYPE html>    
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happyyy Birthdayyy</title>
+
+<style>
+body{
+  margin:0;
+  background: radial-gradient(circle at center, #1a1a1a, #000 80%);
+  font-family: Georgia, serif;
+  color: gold;
+  overflow:hidden;
+  text-align:center;
+}
+
+/* Pages */
+.page{
+  display:none;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+.active{ display:flex; }
+
+h1{
+  text-shadow:0 0 15px gold;
+}
+
+button{
+  background:linear-gradient(45deg,gold,#d4af37);
+  border:none;
+  padding:10px 25px;
+  margin:15px;
+  font-weight:bold;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+/* Cake */
+.cake{
+  position:relative;
+  width:140px;
+  margin-top:40px;
+}
+
+.base{
+  width:140px;
+  height:50px;
+  background:linear-gradient(to bottom,#5a3825,#3b2215);
+  border-radius:15px;
+  margin:0 auto;
+  box-shadow:
+    inset 0 8px 12px rgba(255,255,255,0.1),
+    inset 0 -8px 12px rgba(0,0,0,0.6),
+    0 10px 25px rgba(0,0,0,0.8);
+  opacity:0;
+  transform:translateY(40px);
+  animation:rise 0.6s forwards 0.2s;
+}
+
+.middle{
+  width:140px;
+  height:18px;
+  background:linear-gradient(to right,#fff,#f2f2f2,#fff);
+  border-radius:10px;
+  box-shadow:inset 0 2px 5px rgba(0,0,0,0.2);
+  opacity:0;
+  transform:translateY(40px);
+  animation:rise 0.6s forwards 0.8s;
+}
+
+.top{
+  width:140px;
+  height:45px;
+  background:linear-gradient(to bottom,#6b3e26,#402315);
+  border-radius:15px;
+  box-shadow:
+    inset 0 6px 10px rgba(255,255,255,0.1),
+    inset 0 -6px 10px rgba(0,0,0,0.6);
+  opacity:0;
+  transform:translateY(40px);
+  animation:rise 0.6s forwards 1.4s;
+}
+
+.cream{
+  width:140px;
+  height:25px;
+  background:linear-gradient(to bottom,#ffffff,#f8f8f8);
+  border-radius:60px 60px 20px 20px;
+  position:absolute;
+  top:-15px;
+  box-shadow:
+    0 5px 10px rgba(0,0,0,0.3),
+    inset 0 5px 10px rgba(255,255,255,0.6);
+  opacity:0;
+  transform:translateY(30px);
+  animation:rise 0.6s forwards 2s;
+}
+
+.candle{
+  width:10px;
+  height:35px;
+  background:linear-gradient(to bottom,gold,#d4af37);
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%) translateY(30px);
+  top:-45px;
+  border-radius:5px;
+  box-shadow:0 0 10px gold;
+  opacity:0;
+  animation:riseCandle 0.6s forwards 2.6s;
+}
+
+.flame{
+  width:16px;
+  height:22px;
+  background:radial-gradient(circle at center,#fffacd 0%,gold 60%,orange 100%);
+  border-radius:50%;
+  position:absolute;
+  top:-18px;
+  left:50%;
+  transform:translateX(-50%);
+  box-shadow:0 0 15px gold,0 0 30px orange;
+  animation:flicker 0.3s infinite alternate;
+}
+
+@keyframes rise{
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes riseCandle{
+  to{opacity:1;transform:translateX(-50%) translateY(0);}
+}
+@keyframes flicker{
+  from{transform:translateX(-50%) scale(1);}
+  to{transform:translateX(-50%) scale(1.15);}
+}
+
+/* Confetti */
+.confetti{
+  position:absolute;
+  width:6px;
+  height:12px;
+  background:gold;
+  top:-20px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(100vh) rotate(360deg);}
+}
+
+/* Photo */
+.photo{
+  width:260px;
+  height:320px;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 0 25px gold;
+}
+
+/* Letter */
+.letter{
+  width:80%;
+  max-width:500px;
+  font-size:18px;
+  line-height:1.6;
+  text-shadow:0 0 10px gold;
+}
+
+/* Hug */
+.hug{
+  width:300px;
+  border-radius:20px;
+  box-shadow:0 0 30px gold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIXED MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h1>✨ Happy Birthday Ajayyy ❤️ 😉 🎉</h1>
+  <div class="cake">
+    <div class="cream"></div>
+    <div class="top"></div>
+    <div class="middle"></div>
+    <div class="base"></div>
+    <div class="candle">
+      <div class="flame"></div>
+    </div>
+  </div>
+  <button onclick="nextPage()">Next</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <h1>📸 Limited Edition😂</h1>
+  <img id="slider" class="photo" src="photo1.jpg">
+  <div>
+    <button onclick="prevPhoto()">Previous</button>
+    <button onclick="nextPhoto()">Next</button>
+  </div>
+  <button onclick="nextPage()">Next Page</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <h1>💌 A Small Letter For Uhh</h1>
+  <div class="letter">
+    Happy Birthday Ajayy🤍<br><br>
+    Thank you for being my safe place, and my partner in every kind of madness 😂
+    Life is honestly better with you in it.
+    May all good things follow you and stay with you.
+    Always proud of you, always here for you 💙🎂✨
+  </div>
+  <button onclick="nextPage()">Final Surprise</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <h1>🤗 Mission Complete...😁</h1>
+  <img src="hug-hugs-and-love.gif" class="hug">
+  <button onclick="nextPage()">Last Page</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+  <h1>That's it Babe 😁❤️</h1>
+</div>
+
+<script>
+let currentPage=1;
+let totalPages=5;
+let musicStarted=false;
+
+function nextPage(){
+  if(currentPage < totalPages){
+    document.getElementById("page"+currentPage).classList.remove("active");
+    currentPage++;
+    document.getElementById("page"+currentPage).classList.add("active");
+  }
+
+  if(!musicStarted){
+    document.getElementById("bgMusic").play();
+    musicStarted=true;
+  }
+}
+
+/* Confetti */
+for(let i=0;i<60;i++){
+  let c=document.createElement("div");
+  c.classList.add("confetti");
+  c.style.left=Math.random()*100+"vw";
+  c.style.animationDuration=(3+Math.random()*5)+"s";
+  c.style.opacity=Math.random();
+  document.body.appendChild(c);
+}
+
+/* 4 PHOTO SLIDER */
+let photos=[
+  "photo1.jpg",
+  "photo2.jpeg",
+  "photo3.jpeg",
+  "photo4.jpeg"
+];
+
+let index=0;
+
+function nextPhoto(){
+  index=(index+1)%photos.length;
+  document.getElementById("slider").src=photos[index];
+}
+
+function prevPhoto(){
+  index=(index-1+photos.length)%photos.length;
+  document.getElementById("slider").src=photos[index];
+}
+</script>
+
+</body>
+</html>
